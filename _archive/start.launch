@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="config_path" default="$(find mad_detector)/models/model.json" />
+    <arg name="ir_path" default="$(find mad_detector)/models/model.xml" />
+    <arg name="device" default="CPU" doc="CPU or Myriad" />
+    <arg name="input" default="$(find mad_detector)/test.jpg" />
+    <arg name="compressed" default="false" />
+    <arg name="save_folder" default="" />
+    <arg name="debug_image_enabled" default="true" doc="Published to <debug_detections_image> image topic" />
+    <arg name="processing_rate" default="-1" />
+
+    <node pkg="mad_detector" type="app" name="detector" output="screen" respawn="false">
+        <param name="config_path" value="$(arg config_path)" />
+        <param name="ir_path" value="$(arg ir_path)" />
+        <param name="device" value="$(arg device)" />
+        <param name="input" value="$(arg input)" />
+        <param name="compressed" value="$(arg compressed)" />
+        <param name="save_folder" value="$(arg save_folder)" />
+        <param name="debug_image_enabled" value="$(arg debug_image_enabled)" />
+        <param name="processing_rate" value="$(arg processing_rate)" />
+    </node>
+</launch>

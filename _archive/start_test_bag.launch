@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="filepath" />
+
+    <node pkg="rosbag" type="play" name="player" args="--clock $(arg filepath)" />
+
+    <!-- main_2019-03-22-09-35-36.bag - forward/forward-left/tl-red -->
+
+    <include file="$(find mad_detector)/launch/start.launch" >
+        <arg name="device" value="Myriad" />
+        <arg name="input" value="/signs_camera/image_raw" />
+        <!-- <arg name="input" value="$(find mad_detector)/test.jpg" /> -->
+        <arg name="config_path" value="$(find mad_detector)/models/model.json" />
+        <arg name="ir_path" value="$(find mad_detector)/models/model.xml" />
+        <arg name="compressed" value="true" />
+        <!-- <arg name="save_folder" value="$(find mad_detector)/records" /> -->
+        <arg name="save_folder" value="" />
+        <arg name="debug_image_enabled" value="true" />
+        <arg name="processing_rate" value="5" />
+    </include>
+
+    <node name="debug_image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+        <remap from="image" to="debug_detections_image"/>
+        <param name="autosize" value="true" />
+        <param name="image_transport" value="compressed" />
+    </node>
+
+</launch>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="model_path" default="$(find mad_detector)/models/rf_signs_detection_Yolo4Tiny_best_map75.pth" />
+    <!-- Should be directory with images -->
+    <arg name="input" default="$(find mad_detector)/samples" />
+
+    <node pkg="mad_detector" type="test_detector.py" name="detector" output="screen" respawn="false">
+        <param name="model_path" value="$(arg model_path)" />
+        <param name="input" value="$(arg input)" />
+    </node>
+</launch>

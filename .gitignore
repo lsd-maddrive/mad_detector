@@ -1,0 +1,7 @@
+/build
+/samples/predicted
+/.vscode
+/records
+*.pyc
+
+/venv*
